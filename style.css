@@ -8,23 +8,58 @@ h1 {
   text-align: center;
   color: white;
 }
+h2,
+li {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 
-.grid{
+  color: white;
+  font-size: 15px;
+}
+
+.grid {
   height: 400px;
   width: 400px;
   display: flex;
   flex-wrap: wrap;
   background-color: lightgray;
- 
+  border: 3px solid darkslategray;
+  margin: 0 auto;
 }
 
 .grid div {
   height: 40px;
   width: 40px;
+}
+
+/* .tile-clicked-color{
+  background: darkolivegreen;
+} */
+
+.bomb {
+  background-color: orangered;
+}
+
+.left-container {
+  height: 400px;
+  width: 350px;
+  border: 3px solid darkslategray;
+  line-height: 19px;
+  padding: 5px;
   
 }
-/* .left-container {
- 
-}
 .right-container {
-} */
+  height: 400px;
+  width:200px;
+  border: 3px solid darkslategray;
+}
+
+.time, .mines-left, .help, .reset {
+  height:30px;
+  width:100px;
+  justify-content: center;
+  align-items: center;
+  margin:30px;
+
+
+}
