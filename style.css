@@ -1,0 +1,30 @@
+body {
+  background-color: green;
+}
+h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 45px;
+  text-align: center;
+  color: white;
+}
+
+.grid{
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: lightgray;
+ 
+}
+
+.grid div {
+  height: 40px;
+  width: 40px;
+  
+}
+/* .left-container {
+ 
+}
+.right-container {
+} */

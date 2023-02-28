@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./index.js" defer></script>
+    <title>MINESWEEPER</title>
+  </head>
+  <body>
+    <h1>MINESWEEPER 💣</h1>
+    <div class="grid"></div>
+    <div class="left-container">
+      <h2>How To Play / Rules</h2>
+      <p>
+        Minesweeper is a game where mines are hidden in a grid of squares. Safe
+        squares have numbers telling you how many mines touch the square. You
+        can use the number clues to solve the game by opening all of the safe
+        squares. If you click on a mine you lose the game! You open squares with
+        the left mouse button and put flags on mines with the right mouse
+        button. Pressing the right mouse button again changes your flag into a
+        question mark. When you open a square that does not touch any mines, it
+        will be empty and the adjacent squares will automatically open in all
+        directions until reaching squares that contain numbers. A common
+        strategy for starting games is to randomly click until you get a big
+        opening with lots of numbers.The game ends when all safe squares have
+        been opened. A counter shows the number of mines without flags, and a
+        clock shows your time in seconds.
+      </p>
+    </div>
+    <div class="right-container">
+      <button>Time 0:00</button>
+      <button>Mines Left: 0</button>
+      <button>Help</button>
+      <button>New Game</button>
+    </div>
+  </body>
+</html>
