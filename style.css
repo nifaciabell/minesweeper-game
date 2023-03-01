@@ -2,8 +2,7 @@ body {
   background-color: green;
 }
 h1 {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Rubik Iso;
   font-size: 45px;
   text-align: center;
   color: white;
@@ -31,14 +30,13 @@ li {
   height: 40px;
   width: 40px;
 }
-
 /* .tile-clicked-color{
   background: darkolivegreen;
 } */
 
-.bomb {
+/* .bomb {
   background-color: orangered;
-}
+} */
 
 .left-container {
   height: 400px;
@@ -46,20 +44,32 @@ li {
   border: 3px solid darkslategray;
   line-height: 19px;
   padding: 5px;
-  
+  position: absolute;
+  top:166px;
 }
 .right-container {
   height: 400px;
-  width:200px;
   border: 3px solid darkslategray;
+  display: inline-block;
+  position: absolute;
+  top:166px;
+  right:150px;
+  align-items: center;
 }
 
-.time, .mines-left, .help, .reset {
-  height:30px;
-  width:100px;
-  justify-content: center;
+.time,
+.mines-left,
+.help,
+.reset {
+  height: 30px;
+  width: 100px;
+  justify-content: space-between;
   align-items: center;
-  margin:30px;
+  margin: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /* hover: lightgreen; */
+}
 
-
+.clicked {
+  background-color: blue;
 }

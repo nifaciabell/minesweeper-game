@@ -30,3 +30,19 @@
  // Now that the bombs have been added to the board/grid now I need to add the numbers. 
 // In minesweeper if a cell is clicked that is a number then the bomb is adjacent to that number I need to create a code that will allow me to create a pattern so that the user will have an idea where the bomb is based on the number. 
 
+ // add numbers to the neighboring bombs- if a square has a bomb and if any of the squares in any direction need a total number to give to the user. This means I have to check we have to check every square surrounding 8 squares per bomb.
+
+ // If the square index is larger than 0. I don't want to be in that index because I can't check any cells to the left of it and the code will break since the cells do not exist. If the cell index is bigger than 0 and is not at the leftSide and if both of those statements are true. && if the cell to the left of my current cell contains a bomb I can execute the code total ++. I only add one if all 3 of those statements are true.
+
+// If we are in cell of index 10 I am checking to see if cell of index 1 has a bomb.
+
+// alt code- more dynamic code if size of board increase of decrease, ex: with each level it will increase in the amount of cells in a grid... const rightSide= (i % width === width -1). This code will calculate whatever amount and subtract one
+// console.log(leftSide);
+// console.log(rightSide);
+//   const topSide = (i <= 9)
+//   const bottomSide = (i >= 90)
+// console.log(topSide)
+//   console.log (bottomSide)
+// }
+
+// if the cell I am looping over contains the class of safe (not a bomb)
