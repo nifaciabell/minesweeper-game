@@ -1,74 +1,190 @@
 const grid = document.querySelector(".grid");
-let width = 10; // --> represent the number of squares in each row of thr grid
-let cell = []; // --> empty array that will be used to store references to each of the 100 squares on the grid
-let bombAmount = 20; // --> number of bombs that will be randomly placed on the board 
+// const button = document.getElementsByClassName('help')
+const width = 10;
+const bombAmount = 20;
+let flags = 0;
+const cells = [];
+let gameOver = false;
 
+function createBoard(){
 
-function createBoard() {
-  const bombArray = Array(bombAmount).fill("bomb");  // --> the .fill method with fill the array with the 'bomb' value for each index. Which has length equal to bombAmount - 20
-  const safeArray = Array(100 - bombAmount).fill("safe"); // --> safeArray is an array filled with "safe" values and has a length equal to 100 minus "bombAmount"
+  const bombArray = Array(bombAmount).fill('bomb')
+  const validArray = Array(100- bombAmount).fill('valid')
+  const mergedArrays = [...bombArray, ...validArray]
+  const shuffledArray = mergedArrays.sort(() => 0.5 - Math.random())
 
-  // console.log(bombArray, safeArray)   // --> Output an array of bombs and safe zones 
+  for(let i = 0; i < 100; i++){
+    const square = document.createElement('div')
+    square.setAttribute('id', i)
+    square.classList.add(shuffledArray[i])
+    grid.appendChild(square)
+    cells.push(square)
 
-  const mergeArrays = [...bombArray, ...safeArray];
-  // console.log(mergeArrays)
-
-  const shuffleArray = mergeArrays.sort(() => 0.5 - Math.random());  // --> .sort will shuffle the values of bomb and safe 
- 
-  // console.log(shuffleArray)
-
-  for (let i = 0; i < 100; i++) {
-    const square = document.createElement("div"); //  --> for each iteration the loops creates a new div called square by using the createElement method.
-    square.setAttribute("id", i); // --> the new square element will each an id with the current iteration number 
-    square.classList.add(shuffleArray[i]);
-    // each square is given a classList that corresponds with the shuffleArray value. 
-    grid.appendChild(square);   // --> puts the square divs inside the grid by using appendChild method 
-    cell.push(square); 
-    // --> pushes the squares inside the empty array. (Without this push the code will break) 
-
-    function click(cell) { // --> The "click" function is defined inside the loop. 
-      if (square.classList.contains("bomb")) {// --> When called, it checks if the clicked square contains a "bomb" by using the "contains" method
-        alert("GAME OVER");//  --> If it does, the game ends with an "alert" message.
-      } else { // --> If it does not, the code checks for neighboring bombs and displays a number indicating how many bombs are adjacent to the clicked square.
-        let number = square.getAttribute('data')
-        if (number !=0){// --> if the number is 0 we don't want it showing up we only want numbers 1 and above
-          square.classList.add('clicked') // --> if number does not equal we will create a classList of clicked.
-          square.innerHTML = number  // --> this will display the number and the square at the same time.
-          return// --> break the cycle 
-        }
-        square.classList.add('clicked')// --> this will display the zero value square. It will be a blank square since it is neither a number higher than 0 or bomb. 
-      }
-    }
-    square.addEventListener("click", function (e) {
+    // Add event listener to square element
+    square.addEventListener('click', function() {
       click(square);
     });
-  }
-
-    for (let i = 0; i < 100; i++) {
-      let total = 0;
-      const leftSide = i % width === 0; // --> define left & and right border
-      const rightSide = i % width === 9;
-      
-      // Now I am checking in each direction to see if a bomb exist
-
-      if (cell[i].classList.contains("safe")) {// --> For each iteration, it checks if the corresponding element in the "cell" array contains a "safe" class name.
-
-        // --> If it does not, the code checks each neighboring square for the presence of a "bomb" class name and counts the number of neighboring bombs. 
-
-        if (i > 0 && !leftSide && cell[9].classList.contains('bomb')) total++;
-        if (i > 9 && !rightSide && cell[i + 1 - width].classList.contains('bomb')) total ++
-        if (i > 10 && cell[i-width].classList.contains('bomb')) total ++
-        if (i > 11 && !leftSide && cell[i - 1 - width].classList.contains('bomb')) total ++
-        if (i < 98 && !rightSide && cell[i + 1].classList.contains('bomb')) total ++
-        if (i < 90 && !leftSide && cell[i - 1 + width ].classList.contains('bomb')) total ++
-        if (i < 88 && !rightSide && cell[i + 1 + width].classList.contains('bomb')) total ++
-        if (i < 89 && cell [i + width].classList.contains('bomb')) total ++
-
-        cell[i].setAttribute('data',total)// --> The total number of neighboring bombs is then stored as a "data" attribute on the square using the "setAttribute" method.
-  }
+    square.oncontextmenu = function (e){
+      e.preventDefault()
+      flagBombs(square)
     }
-    
+  }
+
+  for (let i = 0; i < 100; i++){
+    let total = 0
+    const leftSide = (i % width === 0)
+    const rightSide = (i % width === 9)
+
+    if (cells[i].classList.contains("valid")) {
+      if (i > 0 && !leftSide&& cells[i - 1].classList.contains("bomb"))
+        total++;
+      if (
+        i > 9 &&
+        !rightSide &&
+        cells[i + 1 - width].classList.contains("bomb")
+      )
+        total++;
+      if (i > 10 && cells[i - width].classList.contains("bomb")) total++;
+      if (
+        i > 11 &&
+        !leftSide &&
+        cells[i - 1 - width].classList.contains("bomb")
+      )
+        total++;
+      if (i < 98 && !rightSide && cells[i + 1].classList.contains("bomb"))
+        total++;
+      if (
+        i < 90 &&
+        !leftSide &&
+        cells[i - 1 + width].classList.contains("bomb")
+      )
+        total++;
+      if (
+        i < 88 &&
+        !rightSide &&
+        cells[i + 1 + width].classList.contains("bomb")
+      )
+        total++;
+      if (i < 89 && cells[i + width].classList.contains("bomb")) total++;
+      cells[i].setAttribute("data", total);
+    }
+  }
+}
+
+createBoard();
+
+function flagBombs(square){
+  if (gameOver)
+  return
+  if (square.classList.contains('checked-square')&& (flags < bombAmount)){
+if (!square.classList.contains('flag')){
+  square.classList.add('flag')
+  square.innerHTML= '⛳️'
+  square.style.fontSize='x-large'
+  flags ++
+} else {
+square.classList.remove('flag')
+square.innerHTML = ''
+flags --
+}
+  }
+}
+
+function click(square){
+  let currentId = square.id
+  if (gameOver)
+  return
+  if (square.classList.contains('checked-square')|| square.classList.contains('flag'))
+  return
+  if(square.classList.contains('bomb')){
+    loseGame(square)
+    // alert('GAME OVER 💣💣💣💣💣💣💣💣💣💣💣💣💣💣💣💣💣💣💣')
+  } else{
+    let number = square.getAttribute('data')
+    if (number !=0){
+      square.classList.add('clicked-square')
+      square.innerHTML = number
+      square.style.textAlign = "center";
+      square.style.fontSize = '25px'
+      square.style.color = '#fff'
+      return
+    }
+    fanOutSquares(square,currentId)
+  }
+  square.classList.add('clicked-square')
 }
 
 
-createBoard();
+function fanOutSquares(square, currentId) {
+  const isLeftSide = currentId % width === 0;
+  const isRightSide = currentId % width === 9;
+
+  setTimeout(() => {
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        const row = parseInt(currentId / width) + i;
+        const col = (currentId % width) + j;
+        const adjIndex = row * width + col;
+        const isValidIndex =
+          adjIndex >= 0 &&
+          adjIndex < 100 &&
+          !(isLeftSide && j === -1) &&
+          !(isRightSide && j === 1);
+        if (isValidIndex) {
+          const adjSquare = document.getElementById(adjIndex);
+          click(adjSquare);
+        }
+      }
+    }
+  }, 10);
+}
+
+function loseGame(square) {
+  // alert('GAME OVER');
+  gameOver = true;
+
+  cells.forEach(square => {
+    if (square.classList.contains('bomb')) {
+      square.innerText = "💣";
+      square.style.textAlign ='center'
+      square.style.fontSize='25px'
+    }
+  });
+  
+}
+
+function winnerWinner(){
+  let matches = 0 
+  for(let i = 0 ; i < 100; i++)
+  if (cells[i].classList.contains('flag')&& cells[i].classList.contains('bomb')){
+    matches ++
+  }
+  if (matches === bombAmount){
+    console.log('WINNER WINNER')
+    gameOver = true
+  }
+}
+
+function helpButton(){
+  alert('Reread The Game Rules... You Got This!');
+}
+
+const button = document.querySelector('.helpButton');
+button.addEventListener('click', helpButton);
+
+function resetGame() {
+  flags = 0;
+  gameOver = false;
+  cells.length = 0;
+  grid.innerHTML = "";
+  createBoard();
+  cells.forEach(square => {
+    square.classList.remove('clicked-square', 'checked-square', 'flag');
+    square.innerHTML = "";
+  });
+}
+
+const resetButton = document.querySelector('.resetButton');
+resetButton.addEventListener('click', resetGame);
+
+

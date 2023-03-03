@@ -30,13 +30,13 @@ li {
   height: 40px;
   width: 40px;
 }
-/* .tile-clicked-color{
-  background: darkolivegreen;
-} */
 
-/* .bomb {
+.bomb {
   background-color: orangered;
-} */
+}
+.clicked-square {
+  background-color: blue;
+}
 
 .left-container {
   height: 400px;
@@ -45,19 +45,26 @@ li {
   line-height: 19px;
   padding: 5px;
   position: absolute;
-  top:166px;
-}
+  /* top:166px;
+  left:100px */
+} 
 .right-container {
   height: 400px;
   border: 3px solid darkslategray;
   display: inline-block;
   position: absolute;
-  top:166px;
-  right:150px;
+  /* top:166px;
+  right:300px; */
   align-items: center;
 }
 
-.time,
+/* .time{
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+} */
+
 .mines-left,
 .help,
 .reset {
@@ -66,10 +73,10 @@ li {
   justify-content: space-between;
   align-items: center;
   margin: 30px;
+  position: absolute;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   /* hover: lightgreen; */
 }
 
-.clicked {
-  background-color: blue;
-}
+
+
