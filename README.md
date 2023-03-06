@@ -112,7 +112,7 @@ Would there be built-in method I could use that would allow me to execute this f
 <!-- Wireframe -->
 ## Wireframe
 
-![Wireframe img](Screen%20Shot%202023-02-24%20at%202.14.47%20PM.png)
+![Wireframe IMG](Screen%20Shot%202023-03-06%20at%204.45.14%20PM.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
