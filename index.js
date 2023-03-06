@@ -24,10 +24,10 @@ function createBoard(){
     square.addEventListener('click', function() {
       click(square);
     });
-    square.oncontextmenu = function (e){
+    square.addEventListener('contextmenu', function (e){
       e.preventDefault()
       flagBombs(square)
-    }
+    })
   }
 
   for (let i = 0; i < 100; i++){
@@ -75,13 +75,15 @@ createBoard();
 
 function flagBombs(square){
   if (gameOver)
-  return
-  if (square.classList.contains('checked-square')&& (flags < bombAmount)){
-if (!square.classList.contains('flag')){
+ return
+
+if (!square.classList.contains('checked-square')&& (flags < bombAmount)){
+  if (!square.classList.contains('flag')){
   square.classList.add('flag')
-  square.innerHTML= '⛳️'
+  square.innerHTML= '🚩'
   square.style.fontSize='x-large'
   flags ++
+  // winnerWinner()
 } else {
 square.classList.remove('flag')
 square.innerHTML = ''
