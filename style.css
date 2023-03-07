@@ -65,7 +65,8 @@ li {
 
 .mines-left,
 .helpButton,
-.resetButton {
+.resetButton,
+.timer {
   height: 40px;
   width:150px;
   margin: auto;
@@ -73,9 +74,3 @@ li {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-/* .time{
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-} */
